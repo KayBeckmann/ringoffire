@@ -5,5 +5,11 @@
       *ngFor="let card of [0, 1, 2, 3, 4]; let i = index"
       src="../../assets/img/cards/card_cover.png"
     />
+    <img
+      (click)="pickCard()"
+      [class.pick-card]="pickCardAnimation"
+      class="top-card pointer"
+      src="../../assets/img/cards/card_cover.png"
+    />
   </div>
 </div>
