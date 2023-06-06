@@ -15,4 +15,8 @@ export class GameComponent implements OnInit {
   pickCard() {
     this.pickCardAnimation = true;
   }
+
+  dropCard() {
+    this.pickCardAnimation = false;
+  }
 }

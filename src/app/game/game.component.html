@@ -11,5 +11,11 @@
       class="top-card pointer"
       src="../../assets/img/cards/card_cover.png"
     />
+    <img
+      (click)="dropCard()"
+      *ngIf="pickCardAnimation"
+      class="throw-card pointer"
+      src="../../assets/img/cards/clubs_12.png"
+    />
   </div>
 </div>
