@@ -1,5 +1,6 @@
 <div class="field">
   <div class="card-stack">
+    <!-- Stack of cards -->
     <img
       [ngStyle]="{ 'right.px': i * 5 }"
       *ngFor="let card of [0, 1, 2, 3, 4]; let i = index"
@@ -11,8 +12,19 @@
       class="top-card pointer"
       src="../../assets/img/cards/card_cover.png"
     />
+    <!-- Stack for played cards -->
     <img
-      (click)="dropCard()"
+      *ngFor="let card of game.playedCards"
+      class="played-card"
+      src="../../assets/img/cards/{{ card }}.png"
+    />
+    <img
+      *ngIf="game.playedCards.length == 0"
+      class="played-card"
+      src="../../assets/img/cards/card_empty.png"
+    />
+    <!-- Animation -->
+    <img
       *ngIf="pickCardAnimation"
       class="throw-card pointer"
       src="../../assets/img/cards/{{ currentCard }}.png"
