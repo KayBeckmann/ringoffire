@@ -9,6 +9,7 @@ import { Game } from "src/models/game";
 export class GameComponent implements OnInit {
   pickCardAnimation: boolean = false;
   game: Game = new Game();
+  currentCard: string = ``;
 
   constructor() {}
 
@@ -22,7 +23,15 @@ export class GameComponent implements OnInit {
   }
 
   pickCard() {
-    this.pickCardAnimation = true;
+    if (!this.pickCardAnimation) {
+      this.currentCard = this.game.stack.pop();
+      this.game.playedCards.push(this.currentCard);
+      this.pickCardAnimation = true;
+
+      setTimeout(() => {
+        this.pickCardAnimation = false;
+      }, 5000);
+    }
   }
 
   dropCard() {
