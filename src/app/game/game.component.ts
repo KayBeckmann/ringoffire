@@ -45,8 +45,9 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe((name) => {
-      console.log("The dialog was closed");
-      this.game.players.push(name);
+      if (name) {
+        this.game.players.push(name);
+      }
     });
   }
 }

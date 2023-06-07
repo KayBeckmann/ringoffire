@@ -49,8 +49,9 @@ export class GameInfoComponent implements OnChanges {
     }
   ];
 
-  title: string;
-  description: string;
+  title: string = "Please add the players";
+  description: string =
+    "First add all players. After that, the first player will pick a card.";
   split: string[];
   index: number;
   @Input() card: string;
