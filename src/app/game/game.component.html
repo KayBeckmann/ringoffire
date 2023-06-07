@@ -43,3 +43,9 @@
 <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
   <mat-icon>add</mat-icon>
 </button>
+
+<app-game-info
+  class="pin-bottom"
+  [card]="currentCard"
+  *ngIf="currentCard != ''"
+></app-game-info>
