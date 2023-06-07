@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Add new player</h1>
+<div mat-dialog-content>
+  <p>Please enter the name of the new player</p>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="name" placeholder="Name" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="logToConsole()" cdkFocusInitial>
+    Ok
+  </button>
+</div>
