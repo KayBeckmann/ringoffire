@@ -2,7 +2,13 @@ import { Component, OnInit, inject } from "@angular/core";
 import { Game } from "src/models/game";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogAddPlayerComponent } from "../dialog-add-player/dialog-add-player.component";
-import { Firestore, collection, collectionData } from "@angular/fire/firestore";
+import {
+  Firestore,
+  collection,
+  collectionData,
+  doc,
+  setDoc
+} from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 
 @Component({
@@ -18,9 +24,8 @@ export class GameComponent implements OnInit {
   game$: Observable<any>; // Observable -> Bekommt ein Update bei Änderung
 
   constructor(public dialog: MatDialog) {
-    const itemCollection = collection(this.firestore, "games");
-    this.game$ = collectionData(itemCollection);
-    console.log(this.game$);
+    const gameCollection = collection(this.firestore, "games");
+    this.game$ = collectionData(gameCollection);
   }
 
   ngOnInit(): void {
@@ -29,6 +34,12 @@ export class GameComponent implements OnInit {
 
   newGame() {
     this.game = new Game();
+
+    const gameCollection = collection(this.firestore, `games`);
+    setDoc(doc(gameCollection), { game: this.game.toString() });
+
+    // const todosCollection = collection(this.firestore, `todos`);
+    // setDoc(doc(todosCollection),{name:this.userinput})
   }
 
   pickCard() {
