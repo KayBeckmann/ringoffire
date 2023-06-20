@@ -10,6 +10,7 @@ import {
   setDoc
 } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-game",
@@ -22,22 +23,34 @@ export class GameComponent implements OnInit {
   currentCard: string = ``;
   firestore: Firestore = inject(Firestore);
   game$: Observable<any>; // Observable -> Bekommt ein Update bei Änderung
+  gameCollection = collection(this.firestore, `games`);
 
-  constructor(public dialog: MatDialog) {
-    const gameCollection = collection(this.firestore, "games");
-    this.game$ = collectionData(gameCollection);
+  constructor(public router: ActivatedRoute, public dialog: MatDialog) {
+    this.game$ = collectionData(this.gameCollection, { idField: "id" });
   }
 
   ngOnInit(): void {
-    this.newGame();
+    this.router.params.subscribe((params) => {
+      this.loadGame(params);
+    });
   }
 
   newGame() {
     this.game = new Game();
+    setDoc(doc(this.gameCollection), this.game.toJson());
+  }
 
-    const gameCollection = collection(this.firestore, `games`);
-    setDoc(doc(gameCollection), { game: this.game.toJson() });
-    console.log(this.game.toJson());
+  loadGame(gameId) {
+    this.game$.forEach((game) => {
+      if (game[0].id == gameId.id) {
+        this.game.players = game[0].players;
+        this.game.stack = game[0].stack;
+        this.game.playedCards = game[0].playedCards;
+        this.game.currentPlayer = game[0].currentPlayer;
+      }
+    });
+
+    console.log(this.game);
   }
 
   pickCard() {
