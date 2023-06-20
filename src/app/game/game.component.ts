@@ -2,13 +2,7 @@ import { Component, OnInit, inject } from "@angular/core";
 import { Game } from "src/models/game";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogAddPlayerComponent } from "../dialog-add-player/dialog-add-player.component";
-import {
-  Firestore,
-  collection,
-  collectionData,
-  doc,
-  setDoc
-} from "@angular/fire/firestore";
+import { Firestore, collection, collectionData } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 
@@ -33,11 +27,6 @@ export class GameComponent implements OnInit {
     this.router.params.subscribe((params) => {
       this.loadGame(params);
     });
-  }
-
-  newGame() {
-    this.game = new Game();
-    setDoc(doc(this.gameCollection), this.game.toJson());
   }
 
   loadGame(gameId) {
