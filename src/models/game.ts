@@ -20,6 +20,15 @@ export class Game {
     this.playedCards = [];
     this.currentPlayer = 0;
   }
+
+  public toJson() {
+    return {
+      players: this.players,
+      stack: this.stack,
+      playedCards: this.playedCards,
+      currentPlayer: this.currentPlayer
+    };
+  }
 }
 
 function shuffle(array: string[]) {
