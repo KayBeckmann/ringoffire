@@ -16,7 +16,7 @@
     />
     <img
       (click)="pickCard()"
-      [class.pick-card]="pickCardAnimation"
+      [class.pick-card]="game.pickCardAnimation"
       class="top-card pointer"
       src="assets/img/cards/card_cover.png"
     />
@@ -33,7 +33,7 @@
     />
     <!-- Animation -->
     <img
-      *ngIf="pickCardAnimation"
+      *ngIf="game.pickCardAnimation"
       class="throw-card pointer"
       src="assets/img/cards/{{ currentCard }}.png"
     />
@@ -44,4 +44,4 @@
   <mat-icon>add</mat-icon>
 </button>
 
-<app-game-info class="pin-bottom" [card]="currentCard"></app-game-info>
+<app-game-info class="pin-bottom" [card]="game.currentCard"></app-game-info>

@@ -62,7 +62,11 @@ export class GameInfoComponent implements OnChanges {
     this.split = this.card.split("_");
     this.card = this.split[1];
     this.index = Number(this.card) - 1;
-    this.title = this.cardAction[this.index].title;
-    this.description = this.cardAction[this.index].description;
+    this.title = this.cardAction[this.index].title
+      ? this.cardAction[this.index].title
+      : "Please add the players";
+    this.description = this.cardAction[this.index].description
+      ? this.cardAction[this.index].description
+      : "First add all players. After that, the first player will pick a card.";
   }
 }

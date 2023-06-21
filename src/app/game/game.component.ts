@@ -19,9 +19,7 @@ import { __values } from "tslib";
   styleUrls: ["./game.component.scss"]
 })
 export class GameComponent implements OnInit {
-  pickCardAnimation: boolean = false;
   game: Game = new Game();
-  currentCard: string = ``;
   firestore: Firestore = inject(Firestore);
   game$: Observable<any>; // Observable -> Bekommt ein Update bei Änderung
   gameCollection = collection(this.firestore, `games`);
@@ -39,6 +37,8 @@ export class GameComponent implements OnInit {
           this.game.stack = element[index].stack;
           this.game.playedCards = element[index].playedCards;
           this.game.currentPlayer = element[index].currentPlayer;
+          this.game.pickCardAnimation = element[index].pickCardAnimation;
+          this.game.currentCard = element[index].currentCard;
           this.gameID = ID;
         }
       }
@@ -52,18 +52,20 @@ export class GameComponent implements OnInit {
   }
 
   pickCard() {
-    if (!this.pickCardAnimation) {
-      this.currentCard = this.game.stack.pop();
-      this.pickCardAnimation = true;
+    if (!this.game.pickCardAnimation) {
+      this.game.currentCard = this.game.stack.pop();
+      this.game.pickCardAnimation = true;
+      this.updateGame();
 
       setTimeout(() => {
-        this.game.playedCards.push(this.currentCard);
-        this.pickCardAnimation = false;
+        this.game.playedCards.push(this.game.currentCard);
+        this.game.pickCardAnimation = false;
+        this.updateGame();
         this.game.currentPlayer =
           (this.game.currentPlayer + 1) % this.game.players.length;
+        this.updateGame();
       }, 1000);
     }
-    this.updateGame();
   }
 
   openDialog(): void {

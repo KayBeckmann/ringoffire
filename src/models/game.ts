@@ -4,6 +4,9 @@ export class Game {
   public playedCards: string[] = [];
   public currentPlayer: number = 0;
 
+  public pickCardAnimation: boolean = false;
+  public currentCard: string = ``;
+
   currentIndex = this.stack.length;
   randomIndex = 0;
 
@@ -26,7 +29,9 @@ export class Game {
       players: this.players,
       stack: this.stack,
       playedCards: this.playedCards,
-      currentPlayer: this.currentPlayer
+      currentPlayer: this.currentPlayer,
+      pickCardAnimation: this.pickCardAnimation,
+      currentCard: this.currentCard
     };
   }
 }
