@@ -49,9 +49,8 @@ export class GameInfoComponent implements OnChanges {
     }
   ];
 
-  title: string = "Please add the players";
-  description: string =
-    "First add all players. After that, the first player will pick a card.";
+  title: string = "";
+  description: string = "";
   split: string[];
   index: number;
   @Input() card: string;
@@ -65,8 +64,9 @@ export class GameInfoComponent implements OnChanges {
     this.title = this.cardAction[this.index].title
       ? this.cardAction[this.index].title
       : "Please add the players";
-    this.description = this.cardAction[this.index].description
-      ? this.cardAction[this.index].description
-      : "First add all players. After that, the first player will pick a card.";
+    this.description =
+      this.cardAction[this.index].description != ""
+        ? this.cardAction[this.index].description
+        : "First add all players. After that, the first player will pick a card.";
   }
 }
